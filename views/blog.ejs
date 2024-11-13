@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Blogs</title>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container mt-4">
+        <div> <%= blog.title %></div>
+       <img src="<%= blog.coverImage %>" alt="" class="img-fluid" style="width: 500px;">
+       <pre>
+        <%= blog.body %>
+       </pre>
+    </div>      
+    
+    <div class="container mt-4">
+      <img src="<%= blog.yoyo.profilePic %>" width="400px">
+      <%= blog.yoyo.fullName %>
+    </div>
+    <h1>Comments (<%= comment.length %>)</h1>
+    <% if (locals.user) { %>
+        <form action="/blog/comment/<%= blog._id %>" method="post">
+            <div class="mb-3">
+              <input
+                type="text"
+                name="content"
+                class="form-control"
+                placeholder="Enter your comment"
+              />
+              <button class="btn btn-sm btn-primary" type="submit">Add</button>
+            </div>
+          </form>
+    <% } %>
+  <div class="container mt-4">
+    <% comment.forEach(com => { %>
+     <div>
+        <img src="<%= com.createdby.profilePic %>" width="400px">
+        <%= com.createdby.fullName %>
+        <div>
+         <pre>
+                <%= com.content %>
+         </pre>
+   
+     </div>
+    <% }) %>
+  </div>
+
+    <%- include('./partials/script.ejs') %>
+</body>
+</html>

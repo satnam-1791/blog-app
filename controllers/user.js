@@ -2,7 +2,6 @@ const User = require('../models/user');
 
 
 const HandelSignUp = async(req,res)=>{
-    console.log(req.body);
  const {fullName,email,password} = req.body;
  const USER =   await User.create({fullName,email,password})
  return res.redirect('/');

@@ -1,6 +1,10 @@
-const {Schema, model} = require('mongoose');
+
 const mongoose = require("mongoose");
-const blogSchema = new Schema({
+const blogSchema = new mongoose.Schema({
+    yoyo: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user'
+     },
     title: {
         type: String,
         required: true
@@ -12,13 +16,10 @@ const blogSchema = new Schema({
     coverImage: {
         type: String,
     },
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
-    },
+
 },{timestamps:true});
 
 
-const Blog = model('blog', blogSchema);
+const Blog = mongoose.model('blog', blogSchema);
 
 module.exports = Blog;
